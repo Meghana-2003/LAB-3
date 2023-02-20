@@ -1,0 +1,63 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      #circle {
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        border-radius: 25px;
+        background-color: blue;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="circle"></div>
+    <script>
+      const circle = document.querySelector("#circle");
+      let count = 0;
+      
+      // Generates a random number between min and max
+      const randomNum = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+      
+      // Generates a random color
+      const randomColor = () => {
+        const letters = '0123456789ABCDEF';
+        let color = '#';
+        for (let i = 0; i < 6; i++) {
+          color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+      }
+      
+      // Displays the circle with random size, color, and position
+      const displayCircle = () => {
+        const size = randomNum(50, 150);
+        const x = randomNum(0, window.innerWidth - size);
+        const y = randomNum(0, window.innerHeight - size);
+        circle.style.width = `${size}px`;
+        circle.style.height = `${size}px`;
+        circle.style.left = `${x}px`;
+        circle.style.top = `${y}px`;
+        circle.style.backgroundColor = randomColor();
+        circle.style.display = "block";
+      }
+      
+      // Hides the circle
+      const hideCircle = () => {
+        circle.style.display = "none";
+      }
+      
+      circle.addEventListener("click", () => {
+        hideCircle();
+        count++;
+        if (count < 30) {
+          setTimeout(displayCircle, randomNum(500, 2000));
+        }
+      });
+      
+      displayCircle();
+    </script>
+  </body>
+</html>
